@@ -2,7 +2,9 @@
 import inquirer from "inquirer";
 import generateMarkdown from "./utils/generateMarkdown.js";
 import fs from "fs";
-// TODO: Create an array of questions for user input
+import Choices from "inquirer/lib/objects/choices.js";
+// TODO: Create an array of questions for user inputes
+
 const questions = [
     {
         type: 'input',
@@ -18,7 +20,7 @@ const questions = [
         type: 'input',
         name: 'Contents',
         message: ('Table of contents?')
-    },    
+    },
     {
         type: 'input',
         name: 'installation',
@@ -27,16 +29,17 @@ const questions = [
     {
         type: 'input',
         name: 'usage',
-        message: ('what is the product usage?'),
+        message: ('What is the product usage?'),
     },
     {
         type: 'input',
         name: 'license',
         message: ('What is the license?'),
+        choices
     },
     {
         type: 'input',
-        name: 'contributing',
+        name: 'contributors',
         message: ('Who are the contributors in this project?'),
     },
     {
@@ -47,7 +50,7 @@ const questions = [
     {
         type: 'input',
         name: 'questions',
-        message: ('What are your questions?'),
+        message: ('For questions contact:'),
     },
 ];
 
@@ -55,15 +58,15 @@ const questions = [
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
         err ? console.error(err) : console.log('README');
-      });
-    };
+    });
+};
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-    .then((response) => {
-        writeToFile('readme.md',generateMarkdown(response))
-    })
+        .then((response) => {
+            writeToFile('readme.md', generateMarkdown(response))
+        })
 }
 
 // Function call to initialize app
