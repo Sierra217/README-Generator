@@ -18,11 +18,6 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'Contents',
-        message: ('Table of contents?')
-    },
-    {
-        type: 'input',
         name: 'installation',
         message: ('What are the steps required to install your project?'),
     },
@@ -32,10 +27,14 @@ const questions = [
         message: ('What is the product usage?'),
     },
     {
-        type: 'input',
+        type: 'rawlist',
         name: 'license',
-        message: ('What is the license?'),
-        choices
+        message: ('Select a license:'),
+        choices: [
+            {name: 'MIT', value: 'MIT' },
+            {name: 'Apache 2.0', value: 'Apache 2.0'},
+            {name: 'BSD3', value: 'BSD3'}
+        ]
     },
     {
         type: 'input',
@@ -65,7 +64,7 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer.prompt(questions)
         .then((response) => {
-            writeToFile('readme.md', generateMarkdown(response))
+            writeToFile('SAMPLE_README.md', generateMarkdown(response))
         })
 }
 
